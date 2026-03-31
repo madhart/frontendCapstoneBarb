@@ -1,4 +1,5 @@
 import CompanyHeader from "@/components/Header";
+import Navbar from "@/components/Navbar";
 
 export default function CompanyPage() {
   return (
@@ -8,6 +9,7 @@ export default function CompanyPage() {
       </header>
 
       <CompanyHeader />
+      <Navbar />
 
       <section>
         <h2>About</h2>
