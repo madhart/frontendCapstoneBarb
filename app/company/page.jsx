@@ -1,4 +1,4 @@
-import CompanyHeader from "@/components/Header";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import News from "@/components/News.jsx";
 
@@ -233,9 +233,8 @@ export default function CompanyPage() {
 
       <News />
 
-      <footer>
-        <p>Footer content (same as Home page)</p>
-      </footer>
+      <Footer>
+      </Footer>
     </main>
   );
 }
