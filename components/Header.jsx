@@ -12,6 +12,7 @@ export default function Header() {
             <Link href="/contact">Contact</Link>
             <Link href="/events">Events</Link>
             <Link href="/membership">Membership</Link>
+            <Link href="/athletePerformance">Athlete Performance</Link>
         </>
     )
 }
