@@ -1,4 +1,4 @@
-import CompanyHeader from "@/components/Header";
+
 import Navbar from "@/components/Navbar";
 import News from "@/components/News.jsx";
 
