@@ -1,92 +1,84 @@
 import Membership from "@/components/Membership";
 import News from "@/components/News";
 import Sponsors from "@/components/Sponsors";
+import Link from 'next/link';
+import { client } from "@/sanity/lib/client";
 
-export default function contactPage() {
+const CONTACT_QUERY = `
+            *[_type == "contactInfo"][0]{
+            mainHeader,
+            mailingAddressHeading,
+            mailingAddress,
+            generalInquiriesHeading,
+            generalInquiriesEmail,
+            presidentHeading,
+            presidentEmail,
+            boardOfDirectorsHeading,
+            boardOfDirectorsDescription,
+            currentBoardHeading,
+            currentBoardTable
+        }
+            `;
+
+export default async function contactPage() {
+    const contact = await client.fetch(CONTACT_QUERY);
 
     return (
         <main>
-            <header>
-                <h1>Contact us for More Information</h1>
-            </header>
+            <section className="p-6">
+            <h1 className="text-3xl font-bold mb-6">{contact.mainHeader}</h1>
 
-            <section><br />
-                <b><h3>Mailing Address</h3></b>
-                <p>
-                    Bicycle Newfoundland and Labrador <br />
-                    PO BOX 93, STN C <br />
-                    St. John’s, NL <br />
-                    A1C 5H5 <br />
+        {/* Mailing Address */}
+            <div className="mb-8">
+                <h2 className="text-xl font-semibold">{contact.mailingAddressHeading}</h2>
+                <p className="mt-2">{contact.mailingAddress}</p>
+            </div>
 
-                </p>
-            </section>
+        {/* General Inquiries */}
+            <div className="mb-8">
+                <h2 className="text-xl font-semibold">{contact.generalInquiriesHeading}</h2>
+                <a href={`mailto:${contact.generalInquiriesEmail}`} className="text-blue-600 underline">
+                    {contact.generalInquiriesEmail}
+                </a>
+            </div>
 
-            <section><br />
-                <b>General Inquires</b><br />
-                info@bicyclenl.com<br />
+        {/* President */}
+            <div className="mb-8">
+                <h2 className="text-xl font-semibold">{contact.presidentHeading}</h2>
+                <a href={`mailto:${contact.presidentEmail}`} className="text-blue-600 underline">
+                    {contact.presidentEmail}
+                </a>
+            </div>
 
-                <b>President</b><br />
-                president@bicyclenl.com<br />
-            </section><br />
+        {/* Board of Directors */}
+            <div className="mb-8">
+                <h2 className="text-xl font-semibold">{contact.boardOfDirectorsHeading}</h2>
+                <p className="mt-2">{contact.boardOfDirectorsDescription}</p>
+            </div>
 
-            <b><h2>Board of Directors</h2></b>
-            <p>The Board of Bicycle Newfoundland and Labrador (BNL)
-                is composed of a province-wide volunteer board of directors.
-                <br />Each of the directors has been assigned a specific area
-                of responsibility within the organization.</p><br />
-            <h2>Current Board:</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>Position</th>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>President</td>
-                    <td>Kim Furlong</td>
-                </tr>
-                <tr>
-                    <td>Secretary</td>
-                    <td>Greg Collins (Acting)</td>
-                </tr>
-                <tr>
-                    <td>Treasurer</td>
-                    <td>Gillian Russell</td>
-                </tr>
-                <tr>
-                    <td>Director Coaching</td>
-                    <td>John Hancock</td>
-                </tr>
-                <tr>
-                    <td>Director Inclusion</td>
-                    <td>Kevin Flynn</td>
-                </tr>
-                <tr>
-                    <td>Director Events</td>
-                    <td>Rob Pittman</td>
-                </tr>
-                <tr>
-                    <td>Director Community Transport & Advocacy</td>
-                    <td>Elizabeth Yeoman</td>
-                </tr>
-                <tr>
-                    <td>Director at Large</td>
-                    <td>Greg Collins</td>
-                </tr>
-                <tr>
-                    <td>Director at Large</td>
-                    <td>Ryan Butt</td>
-                </tr>
-                </tbody>
-            </table>
-            <br />
-
+        {/* Board Table */}
+            <div className="mb-8">
+                <h2 className="text-xl font-semibold">{contact.currentBoardHeading}</h2>
+                <table className="w-full mt-4 border-collapse border border-gray-300">
+                    <thead>
+                    <tr className="bg-gray-200">
+                        <th className="border border-gray-300 p-2 text-left">Position</th>
+                        <th className="border border-gray-300 p-2 text-left">Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {contact.currentBoardTable?.rows?.map((row, idx) => (
+                        <tr key={idx}>
+                            <td className="border border-gray-300 p-2">{row.cells[0]}</td>
+                            <td className="border border-gray-300 p-2">{row.cells[1]}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+        </section>
             <Membership /><br />
             <News /><br />
-            <Sponsors /><br />
-
         </main>
     );
 }
