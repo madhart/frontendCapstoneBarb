@@ -1,11 +1,14 @@
-import News from "@/components/News.jsx";
-
+import News from "@/components/News";
+import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
 
 export default function Membership() {
     return (
         <main>
             <header>
+                <br /> 
                 <h1>Memberships and Insurance</h1>
+                <br /> 
                 <p>
                     Welcome to all of our new and returning BNL Members! We will strive to
                     keep all BNL Members informed about what is happening in the
@@ -15,7 +18,7 @@ export default function Membership() {
                     for scheduled BNL rides and sanctioned events.
                 </p>
             </header>
-
+        <br /> 
             <section>
                 <h2>2026 Membership Rates</h2>
                 <table>
@@ -56,6 +59,7 @@ export default function Membership() {
                             </td>
                         </tr>
                         <tr>
+
                             <td>Technical License</td>
                             <td>
                                 You may apply for a UCI Technical Licence if you are purchasing a
@@ -83,15 +87,16 @@ export default function Membership() {
                         </tr>
                     </tbody>
                 </table>
+                <br /> 
                 <p>
                     Please note, either a BNL Membership, UCI license or Day Pass is
                     required for each BNL sanctioned event or race. Waiver to be signed
                     upon registration for each type of membership.
                 </p>
                 <p>For help troubleshooting during registration please contact:</p>
+                <br /> 
                 <p>
-                    CCN:
-                    <br />
+                    CCN: <br />
                     info@ccnbikes.com
                     <br />
                     1-800-534-2453
@@ -102,7 +107,7 @@ export default function Membership() {
                     info@bicyclenl.com
                 </p>
             </section>
-
+               <br /> 
             <section>
                 <h2>Summary of Membership Categories</h2>
                 <table>
@@ -157,11 +162,13 @@ export default function Membership() {
 
             <section>
                 <h2>Insurance Information</h2>
+                <br /> 
                 <p>
                     BFL CANADA, in partnership with Cycling Canada, is proud to offer a
                     comprehensive Cycling Insurance and Risk Management Program for
                     governing bodies across the country.
                 </p>
+                <br /> 
                 <p>
                     This program has been specifically designed to support Cycling Canada,
                     Participating Provincial &amp; Territorial Associations (PPTAs),
@@ -169,6 +176,7 @@ export default function Membership() {
                     Cycling Canada and PPTA members for approved and sanctioned activities
                     confirmed through their respective provincial associations.
                 </p>
+                <br /> 
                 <p>
                     Insurance is one important method of handling claims, but only when it
                     is practical, possible, and cost-effective. Cycling Canada has engaged
@@ -188,18 +196,20 @@ export default function Membership() {
                     </a>
                     )
                 </p>
+                <br /> 
                 <p>
                     The insurance provided to BNL members only applies during sanctioned
                     activities including races, rides, and training offered by BNL. When
                     individuals are using their bicycle outside of those times, that
                     activity would not qualify for coverage.
                 </p>
+                <br /> 
                 <p>
                     BNL Members who would like their non-sanctioned activities covered can
                     purchase additional insurance during the registration process. The
                     options for extended coverage are outlined below:
                 </p>
-
+                    <br /> 
                 <table>
                     <thead>
                         <tr>
@@ -234,9 +244,9 @@ export default function Membership() {
                         </tr>
                     </tbody>
                 </table>
-
+                    <br /> 
                 <p>Policy Period January 1, 2026 - January 1, 2027</p>
-
+                    <br /> 
                 <h3>Cycling Coverage for Cycling Canada and PPTA Members</h3>
                 <p>
                     BFL CANADA, together with Cycling Canada, provides exclusive insurance
@@ -246,6 +256,7 @@ export default function Membership() {
                     have their own programs with similar, and in most cases, equivalent
                     coverages. Please visit their websites for additional information.
                 </p>
+                <br /> 
                 <p>
                     Our comprehensive Cycling Insurance Program is designed to protect all
                     aspects of your cycling operations, including sanctioned events and
@@ -262,7 +273,7 @@ export default function Membership() {
                     <li>Volunteers</li>
                     <li>Administrators</li>
                 </ul>
-
+                    <br />              
                 <h3>Sanctioned Events &amp; Approved Activities include (but are not limited to):</h3>
                 <ul>
                     <li>Club rides and meetings</li>
@@ -272,13 +283,13 @@ export default function Membership() {
                     <li>Fundraising activities</li>
                     <li>National Team Projects</li>
                 </ul>
-
+                    <br /> 
                 <p>
                     This program ensures that Cycling Canada and PPTA members are protected
                     for all approved and sanctioned events and activities as confirmed
                     through their provincial association.
                 </p>
-
+                    <br /> 
                 <h3>Cycling Insurance Coverage Includes:</h3>
                 <ul>
                     <li>
@@ -294,7 +305,7 @@ export default function Membership() {
                         provincial boards.
                     </li>
                 </ul>
-
+                    <br /> 
                 <h3>Who&apos;s an Insured?</h3>
                 <p>
                     All members in good standing with Cycling Canada and the Collective
@@ -308,12 +319,12 @@ export default function Membership() {
                     <li>Staff</li>
                     <li>Volunteers</li>
                 </ul>
-
+                    <br /> 
                 <p>
                     Participant accident policy is for cycling within Canada only. If
                     travelling outside Canada, you should investigate travel insurance.
                 </p>
-
+                    <br /> 
                 <h3>Cyclists&apos; responsibility code</h3>
                 <p>
                     Cyclists, pedestrians, and motorists must learn to coexist on the road
@@ -321,6 +332,7 @@ export default function Membership() {
                     offers 10 tenets to help prepare cyclists and bike riders to avoid
                     crashes, share the road, stay safe, and have fun.
                 </p>
+                <br /> 
                 <ol>
                     <li>
                         Always stay in control. You must be able to ride safely among
@@ -366,12 +378,12 @@ export default function Membership() {
                         Responsibility Code.
                     </li>
                 </ol>
-
+                    <br /> 
                 <p>
                     Know the code-be safety conscious. It&apos;s your responsibility to stay
                     safe and keep others around you safe.
                 </p>
-
+                    <br /> 
                 <h3>Cycling Canada and PPTA Insurance Program</h3>
                 <p>
                     Why Liability Insurance? Because no matter how careful we are,
@@ -380,7 +392,7 @@ export default function Membership() {
                     will need to be defended in court. A liability policy will pay for his
                     defence as well as any cost awarded against you.
                 </p>
-
+                    <br /> 
                 <h3>Types of Coverage</h3>
                 <p>
                     Commercial General Liability: For members under the Cycling Canada
@@ -390,6 +402,7 @@ export default function Membership() {
                     passers-by, property of lessors, and others resulting from your
                     operations or actions.
                 </p>
+                    <br /> 
                 <p>
                     Sport Accident Insurance: This policy covers members under the Cycling
                     Canada Insurance Program who have sustained an injury while
@@ -398,7 +411,7 @@ export default function Membership() {
                     medical bills for an insured member. This policy is secondary to any
                     other health care plan. Medical Expense Coverage within Canada only.
                 </p>
-
+                    <br /> 
                 <p>Click below to explore the full details:</p>
                 <p>
                     <a
@@ -411,10 +424,17 @@ export default function Membership() {
                     .
                 </p>
                 <p>
-                    Report a participant injury or accident using the Sport Accident Claim
-                    Form (opens PDF).
+                    <a
+                        href="/documents/BFL_Athletic-Accident-Claims-form.pdf"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Report a participant injury or accident using the Sport Accident Claim
+                        Form (opens PDF)
+                    </a>
+                    .
                 </p>
-
+                    <br /> 
                 <h3>Disclaimer and Reliance on Report</h3>
                 <p>
                     This summary has been prepared for information purposes only. The
@@ -423,8 +443,12 @@ export default function Membership() {
                     referred to herein. In all cases, the actual policy documents will
                     supersede the contents and representations herein.
                 </p>
-                <News />
+                <br /> 
             </section>
+            <News /><br />
+            <Contact /><br />
+            <Footer />
         </main>
     );
 }
+        
