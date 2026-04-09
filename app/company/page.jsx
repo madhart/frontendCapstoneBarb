@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import News from "@/components/News.jsx";
-import HeroSection from "@/components/HeroSection";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 
