@@ -1,6 +1,7 @@
 import { PortableText } from "@portabletext/react";
 import { client } from "../../sanity/lib/client";
 import Membership from "../../components/Membership";
+import Registration from "../../components/Registration";
 import News from "../../components/News";
 
 const MEMBERSHIP_HEADER_QUERY = `*[_type == "membershipInsuranceInfo" && (order == 1 || order == "1")][0]{
@@ -229,6 +230,10 @@ export default async function MembershipPage() {
           ) : null}
         </section>
       ) : null}
+
+      <section className="space-y-4 border-b border-slate-200 py-8">
+        <Registration />
+      </section>
 
       <section className="space-y-4 py-8">
         <News />
