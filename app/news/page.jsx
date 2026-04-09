@@ -1,7 +1,7 @@
 import Link from "next/link";
 import News from "@/components/News.jsx";
 
-export default async function News() {
+export default async function NewsPage() {
 
 
     
