@@ -1,240 +1,176 @@
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import News from "@/components/News.jsx";
+import HeroSection from "@/components/HeroSection";
+import { PortableText } from "@portabletext/react";
+import { client } from "@/sanity/lib/client";
 
-const volunteerWays = [
-  "Sign on as a competitive cycling coach",
-  "Volunteer in governance or committee work",
-  "Help with events both approved and sanctioned",
-  "Marshal races/events",
-  "Organize sanctioned group rides",
-  "Join the Board of Directors (annually at the AGM)",
-];
+const COMPANY_INFO_QUERY = `*[_type == "companyInfo"] | order(order asc) {
+  _id,
+  content,
+  title,
+  order
+}`;
 
-const advocacyInitiatives = [
-  "Support for effective cycling infrastructure throughout the province",
-  "Assist in the National Active Transportation Strategy",
-  "Aid federal e-bike regulation, education programs, and rebate programs",
-  "Continued development of the Newfoundland T\'Railway for cycling",
-  "Help in the development of mountain bike infrastructure in Pippy Park",
-];
-
-const awards2025 = [
-  ["Junior Female Mountain Bike Athlete of the Year", "Lydia Parsons"],
-  ["Junior Male Mountain Bike Athlete of the Year", "Ian Organ"],
-  ["Junior Female Road Cycling Athlete of the Year", "Portia Curnoe-Afanassiev"],
-  ["Junior Male Road Cycling Athlete of the Year", "Lincoln Harris"],
-  ["Senior Female Mountain Bike Athlete of the Year", "Sophie Cote"],
-  ["Senior Male Mountain Bike Athlete of the Year", "Austin Whelan"],
-  ["Senior Female Road Cycling Athlete of the Year", "Stephanie Nevin"],
-  ["Senior Male Road Cycling Athlete of the Year", "Eric Stock"],
-  ["Outstanding Volunteer of the Year", "Gillian Russell"],
-  ["Outstanding Coach of the Year", "Mick Cutler"],
-];
-
-export default function CompanyPage() {
-  return (
-    <main>
-      <Navbar />
-      <section>
-        <h1>Bicycle Newfoundland and Labrador</h1>
-        <p>
-          Promoting cycling excellence, advocacy, and community across the province.
-        </p>
-      </section>
-
-      <section>
-        <h2>About</h2>
-
-        <article>
-          <h3>Constitution and By-laws</h3>
-          <p>
-            <a href="#">View Constitution and By-laws Document (PDF)</a>
-          </p>
-        </article>
-
-        <article>
-          <h3>Volunteers</h3>
-          <p>
-            Bicycle Newfoundland and Labrador (BNL) is run and organized by volunteers
-            from across the province. We always welcome help and support from anyone
-            interested.
-          </p>
-          <p>The ways you can volunteer include:</p>
-          <ul>
-            {volunteerWays.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <p>
-            If you would like to contribute, contact BNL at{" "}
-            <a href="mailto:info@bicyclenl.com">info@bicyclenl.com</a>.
-          </p>
-        </article>
-
-        <article>
-          <h3>Advocacy</h3>
-          <p>
-            Bicycle Newfoundland and Labrador (BNL) is engaged in local, provincial,
-            and federal advocacy initiatives including:
-          </p>
-          <ul>
-            {advocacyInitiatives.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </article>
-
-        <article>
-          <h3>Bicycle Safety Campaign - One Metre Rule</h3>
-          <p>
-            In 2018, BNL successfully lobbied the provincial government to pass
-            legislation regarding the One Metre Rule. On March 5, 2019, the Highway
-            Traffic Act was amended to increase safety on provincial roads and
-            highways.
-          </p>
-          <p>
-            Drivers must leave one metre of open space between their vehicle and a
-            bicycle (or pedestrian) on roads with posted speeds of 60 km/h or less.
-            The required distance is one and a half metres for roads posted above
-            60 km/h.
-          </p>
-          <p>
-            In passing this law, Newfoundland and Labrador joined Ontario, Quebec,
-            Nova Scotia, New Brunswick, and Prince Edward Island with similar
-            legislation.
-          </p>
-        </article>
-
-        <article>
-          <h3>T&apos;Railway</h3>
-          <p>
-            The Newfoundland T&apos;Railway forms part of the Trans Canada Trail and
-            covers 883 km (549 mi), linking urban, rural, and wilderness areas.
-          </p>
-          <p>
-            Protected as a linear park, it follows the historic Newfoundland Railway
-            corridor from Channel-Port aux Basques to St. John&apos;s with branches to
-            Stephenville, Lewisporte, Bonavista, Placentia, and Carbonear.
-          </p>
-          <p>
-            Cycling the Newfoundland T&apos;Railway is an adventure for riders who want to
-            experience the province&apos;s wilderness settings.
-          </p>
-          <p>Resources:</p>
-          <ul>
-            <li>
-              <a href="https://en.wikipedia.org/wiki/T%27Railway">
-                Learn about T&apos;Railway on Wikipedia
-              </a>
-            </li>
-            <li>
-              <a href="#">Slow Biker&apos;s article: Across Newfoundland by Fatbike</a>
-            </li>
-            <li>
-              <a href="#">Newfoundland T&apos;Railway guide on Bikepacking.com</a>
-            </li>
-            <li>
-              <a href="https://www.trailway.ca/">Trailway.ca</a>
-            </li>
-          </ul>
-        </article>
-      </section>
-
-      <section>
-        <h2>Strategic Plan</h2>
-        <p>The current strategic plan will be updated as it expires in 2026.</p>
-        <p>
-          Plan link: <a href="#">Strategic Plan (PDF)</a>
-        </p>
-      </section>
-
-      <section>
-        <h2>Policies</h2>
-        <p>Current BNL policies will be listed and updated here as they are revised.</p>
-        <ul>
-          <li>
-            <a href="#">Policy Document (PDF)</a>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Financial Reports</h2>
-        <ul>
-          <li>
-            <a href="#">Latest Financial Report (PDF)</a>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Annual General Meeting (AGM) and Financial Statements</h2>
-        <p>
-          This section tracks the history of financial statements and reports
-          presented at BNL&apos;s AGM.
-        </p>
-        <p>2026 AGM Date: TBD (Fall 2026)</p>
-        <ul>
-          <li>
-            <a href="#">2025 AGM Report (PDF)</a>
-          </li>
-          <li>
-            <a href="#">2024 AGM Report (PDF)</a>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>BNL Membership</h2>
-        <p>
-          Register or renew your BNL membership through the current Cycling Canada
-          Network (CCN) registration system.
-        </p>
-        <p>
-          <a href="#">Go to CCN Registration</a>
-        </p>
-      </section>
-
-      <section>
-        <h2>BNL Awards</h2>
-        <p>
-          The BNL Awards program recognizes the outstanding achievements of members,
-          including Junior and Senior Mountain Bike and Road Cycling athletes,
-          Outstanding Coach, and Outstanding Volunteer.
-        </p>
-
-        <article>
-          <h3>2025 Season Award Winners</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Award Category</th>
-                <th>Winner</th>
+// Custom PortableText components with Tailwind styling
+const portableTextComponents = {
+  types: {
+    table: ({ value }) => {
+      if (!value || !value.rows) return null;
+      
+      return (
+        <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md my-6">
+          <tbody>
+            {value.rows.map((row, rowIdx) => (
+              <tr key={rowIdx} className="border-b border-gray-200 hover:bg-blue-50">
+                {row.cells?.map((cell, cellIdx) => (
+                  <td key={cellIdx} className="px-6 py-4 text-gray-800">{cell}</td>
+                ))}
               </tr>
-            </thead>
-            <tbody>
-              {awards2025.map(([category, winner]) => (
-                <tr key={category}>
-                  <td>{category}</td>
-                  <td>{winner}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p>
-            <strong>
-              Congratulations to all winners, nominees, and members on an outstanding
-              cycling season.
-            </strong>
-          </p>
-        </article>
-      </section>
+            ))}
+          </tbody>
+        </table>
+      );
+    },
+  },
+  block: {
+    normal: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>,
+  },
+  marks: {
+    strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
+    em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+    link: ({ value, children }) => (
+      <a href={value.href} className="text-blue-600 hover:text-blue-800 hover:underline" target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    ),
+  },
+};
 
-      <News />
 
-      <Footer>
-      </Footer>
-    </main>
+
+export default async function CompanyPage() {
+  const companyInfo = await client.fetch(COMPANY_INFO_QUERY);
+  
+  // Organize sections by category for proper display order
+  const sectionsByCategory = {
+    header: null,
+    about: [],
+    strategic: [],
+    agm: [],
+    awards: [],
+  };
+
+  // Categorize sections based on title and order
+  companyInfo.forEach((section) => {
+    const title = section.title?.toLowerCase() || "";
+    const order = section.order?.toString() || "";
+    
+    if (title.includes("header") || order === "1") {
+      sectionsByCategory.header = section;
+    } else if (title.includes("about") || order.startsWith("2")) {
+      sectionsByCategory.about.push(section);
+    } else if (title.includes("strategic") || order === "3") {
+      sectionsByCategory.strategic.push(section);
+    } else if (title.includes("agm") || title.includes("annual general") || order === "6") {
+      sectionsByCategory.agm.push(section);
+    } else if (title.includes("award") || order === "7") {
+      sectionsByCategory.awards.push(section);
+    }
+  });
+
+  // Helper to render a section with title and content
+  const renderSection = (section) => (
+    <article key={section._id} className="mb-8 p-6 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+      {section.title && <h3 className="text-2xl font-semibold text-blue-700 mb-4">{section.title}</h3>}
+      <PortableText 
+        value={section.content}
+        components={portableTextComponents}
+      />
+    </article>
+  );
+
+  return (
+    <>
+      <Navbar />
+      
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        {/* Header Section - from Sanity */}
+        {sectionsByCategory.header ? (
+          <section className="mb-12 text-left py-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg px-8">
+            <PortableText 
+              value={sectionsByCategory.header.content}
+              components={{
+                block: {
+                  normal: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>,
+                  h1: ({ children }) => <h1 className="text-4xl font-bold text-gray-900 mb-6">{children}</h1>,
+                  h2: ({ children }) => <h2 className="text-3xl font-bold text-gray-900 mb-4">{children}</h2>,
+                },
+                marks: {
+                  strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
+                  em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+                },
+              }}
+            />
+          </section>
+        ) : null}
+
+        {/* About Section */}
+        {sectionsByCategory.about.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">About</h2>
+            {sectionsByCategory.about.map(renderSection)}
+          </section>
+        )}
+
+        {/* Strategic Plan Section */}
+        {sectionsByCategory.strategic.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">Strategic Plan</h2>
+            {sectionsByCategory.strategic.map(renderSection)}
+          </section>
+        )}
+
+        {/* Policies Section - Frontend PDFs */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">Policies</h2>
+          <div className="p-6 bg-white rounded-lg border border-gray-200">
+            <p className="text-gray-700 mb-6">BNL policies and governance documents:</p>
+            <ul className="space-y-3">
+              <li>
+                <a href="https://drive.google.com/drive/folders/1uZKSClDPi-YlDOtbhT" 
+                   className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                  📄 Access BNL Policies (Google Drive)
+                  <span className="ml-2">↗</span>
+                </a>
+              </li>
+            </ul>
+            <p className="text-sm text-gray-500 mt-6">To be updated with individual policy documents</p>
+          </div>
+        </section>
+
+        {/* AGM and Financial Statements Section */}
+        {sectionsByCategory.agm.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">Annual General Meeting (AGM) & Financial Statements</h2>
+            {sectionsByCategory.agm.map(renderSection)}
+          </section>
+        )}
+
+        {/* Awards Section */}
+        {sectionsByCategory.awards.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">{sectionsByCategory.awards[0].title}</h2>
+            {sectionsByCategory.awards.map(renderSection)}
+          </section>
+        )}
+
+        {/* News Section */}
+        <section className="mt-16 pt-12 border-t-2 border-gray-300">
+          <News />
+        </section>
+      </main>
+    </>
   );
 }
