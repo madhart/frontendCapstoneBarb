@@ -22,8 +22,21 @@ const portableTextComponents = {
 
       return (
         <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md my-6">
+          <thead>
+            <tr className="bg-blue-100 border-b border-blue-200">
+              {value.rows[0]?.cells?.map((cell, cellIdx) => (
+                <th
+                  key={cellIdx}
+                  scope="col"
+                  className="px-6 py-4 text-left text-blue-900 font-semibold"
+                >
+                  {cell}
+                </th>
+              ))}
+            </tr>
+          </thead>
           <tbody>
-            {value.rows.map((row, rowIdx) => (
+            {value.rows.slice(1).map((row, rowIdx) => (
               <tr key={rowIdx} className="border-b border-gray-200 hover:bg-blue-50">
                 {row.cells?.map((cell, cellIdx) => (
                   <td key={cellIdx} className="px-6 py-4 text-gray-800">
@@ -63,16 +76,6 @@ export default async function Membership() {
           No table found. Confirm the Sanity document is published and has a table
           block in content.
         </p>
-      )}
-    </>
-  );
-
-  return (
-    <>
-      {tableOnlyContent.length > 0 ? (
-        <PortableText value={tableOnlyContent} components={portableTextComponents} />
-      ) : (
-        <p>No table found for membership item order 2.</p>
       )}
     </>
   );
