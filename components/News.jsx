@@ -26,22 +26,22 @@ export default async function News() {
 
   return (
     <section>
-      <h2 className="text-xl font-semibold">News</h2>
+      <h2 className="text-2xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">News</h2>
 
-      <table className="w-full table-fixed">
+      <table className="w-full table-fixed mb-6">
         <tbody>
           <tr>
             {items.map((item) => (
               <td key={item._id} className="align-top p-4 w-1/4">
-                <Link href={`/news/${item.slug}`} className="font-semibold underline">
+                <Link href={`/news/${item.slug}`} className="font-semibold text-blue-600 hover:text-blue-800 underline">
                   {item.title}
                 </Link>
 
-                <div className="text-sm opacity-80 mt-1">
+                <div className="text-sm text-gray-500 mt-1">
                   {formatPostedAt(item.postedAt)}
                 </div>
 
-                <p className="mt-2">
+                <p className="mt-2 text-gray-700">
                   {item.shortenedContent}
                 </p>
               </td>
@@ -49,6 +49,15 @@ export default async function News() {
           </tr>
         </tbody>
       </table>
+
+      <div className="text-center">
+        <Link 
+          href="/news" 
+          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition"
+        >
+          View All News
+        </Link>
+      </div>
     </section>
   );
 }
