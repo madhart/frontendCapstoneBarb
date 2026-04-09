@@ -1,4 +1,4 @@
-﻿import Navbar from "@/components/Navbar";
+﻿
 import Membership from "@/components/Membership";
 import News from "@/components/News";
 import Sponsors from "@/components/Sponsors";
@@ -59,7 +59,7 @@ export default async function ContactPage() {
 
   return (
     <>
-      <Navbar />
+      
       <main className="max-w-6xl mx-auto px-4 py-8">
         <section className="mb-12 text-center py-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg px-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us for More Information</h1>
