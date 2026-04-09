@@ -3,7 +3,6 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client.js";
 import { defineQuery } from "next-sanity";
 import { PortableText } from "@portabletext/react";
-import Navbar from "@/components/Navbar";
 import Carousel from "@/components/Carousel";
 import News from "@/components/News.jsx";
 
@@ -15,8 +14,6 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar />
-      
       <Carousel 
         title="Bicycle Newfoundland and Labrador"
         description="Join our vibrant cycling community"

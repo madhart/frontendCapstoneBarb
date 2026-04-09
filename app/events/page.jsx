@@ -1,6 +1,5 @@
 import Contact from "@/components/Contact";
 import EventsTable from "@/components/EventsTable";
-import Footer from "@/components/Footer";
 import Membership from "@/components/Membership";
 import News from "@/components/News";
 
@@ -45,7 +44,6 @@ export default function events() {
             <Membership /><br />
             <News /><br />
             <Contact /><br />
-            <Footer />
 
         </main>
     );
