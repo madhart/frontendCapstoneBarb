@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import News from "@/components/News.jsx";
+import Registration from "@/components/Registration";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 
@@ -134,26 +135,170 @@ export default async function CompanyPage() {
           <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">Policies</h2>
           <div className="p-6 bg-white rounded-lg border border-gray-200">
             <p className="text-gray-700 mb-6">BNL policies and governance documents:</p>
-            <ul className="space-y-3">
-              <li>
-                <a href="https://drive.google.com/drive/folders/1uZKSClDPi-YlDOtbhT" 
-                   className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
-                   target="_blank" 
-                   rel="noopener noreferrer">
-                  📄 Access BNL Policies (Google Drive)
-                  <span className="ml-2">↗</span>
-                </a>
-              </li>
-            </ul>
-            <p className="text-sm text-gray-500 mt-6">To be updated with individual policy documents</p>
+            
+            {/* Main Policies */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Policy Documents</h3>
+              <ul className="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <li>
+                  <a href="/policies/BNL Appeal Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Appeal Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Athlete Protection Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Athlete Protection Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Club Affiliation Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Club Affiliation Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Code of Conduct and Ethics.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Code of Conduct and Ethics
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Conflict of Interest Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Conflict of Interest Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Discipline and Complaint Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Discipline and Complaint Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Dispute Resolution Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Dispute Resolution Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Healthy Eating Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Healthy Eating Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Safe Sport Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Safe Sport Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/BNL Screening Policy.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Screening Policy
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Safe Sport Resources */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Safe Sport Resources</h3>
+              <ul className="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <li>
+                  <a href="/policies/Safe Sport - 1 - ITP Safe Sport Complaint Process.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Safe Sport Complaint Process
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/Safe Sport - 2 - ITP Sport Case  Manager - Your Guide Through the Complaint Process.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Case Manager Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/Safe Sport - 3 - Flowchart-R6.jpg" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📊 Complaint Process Flowchart
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/Safe Sport - 4 - Step by Step Guide To Filing a Complaint.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 Step by Step Complaint Guide
+                  </a>
+                </li>
+                <li>
+                  <a href="/policies/Safe Sport - 6 - About ITP Sport & Recreation.pdf" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     target="_blank" 
+                     rel="noopener noreferrer">
+                    📄 About ITP Sport & Recreation
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
         {/* AGM and Financial Statements Section */}
-        {sectionsByCategory.agm.length > 0 && (
+        {(sectionsByCategory.agm.length > 0) && (
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">Annual General Meeting (AGM) & Financial Statements</h2>
             {sectionsByCategory.agm.map(renderSection)}
+            
+            {/* Financial Reports */}
+            <div className="mt-8 p-6 bg-white rounded-lg border border-gray-200">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">Financial Reports</h3>
+              <p className="text-gray-700 mb-6">View our financial transparency documents:</p>
+              <ul className="space-y-3">
+                <li>
+                  <a href="/financialreports/BNL Event Expense Report.xlsx" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     download>
+                    📊 BNL Event Expense Report
+                  </a>
+                </li>
+                <li>
+                  <a href="/financialreports/BNL Expense Report.xlsx" 
+                     className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center"
+                     download>
+                    📊 BNL Expense Report
+                  </a>
+                </li>
+              </ul>
+            </div>
           </section>
         )}
 
@@ -164,6 +309,9 @@ export default async function CompanyPage() {
             {sectionsByCategory.awards.map(renderSection)}
           </section>
         )}
+
+        {/* Registration Section */}
+        <Registration />
 
         {/* News Section */}
         <section className="mt-16 pt-12 border-t-2 border-gray-300">

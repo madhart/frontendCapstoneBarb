@@ -1,6 +1,7 @@
 ﻿
 import Membership from "@/components/Membership";
 import News from "@/components/News";
+import Registration from "@/components/Registration";
 import Sponsors from "@/components/Sponsors";
 import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
@@ -75,6 +76,7 @@ export default async function ContactPage() {
             <p className="text-gray-600">Contact content not yet available.</p>
           </section>
         )}
+        <Registration />
         <section className="mt-16 pt-12 border-t-2 border-gray-300 mb-12">
           <Membership />
         </section>
