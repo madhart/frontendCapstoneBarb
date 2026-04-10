@@ -1,12 +1,12 @@
 import {PortableText} from '@portabletext/react'
-import imageUrlBuilder from '@sanity/image-url'
+import createImageUrlBuilder from '@sanity/image-url'
 import {client} from '@/sanity/lib/client'
-import Contact from '@/components/Contact'
+
 import EventsTable from '@/components/EventsTable'
 import Membership from '@/components/Membership'
 import News from '@/components/News'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 const urlFor = (source) => builder.image(source)
 
 const EVENTS_PAGE_QUERY = `
