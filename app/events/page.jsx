@@ -4,6 +4,7 @@ import {client} from '@/sanity/lib/client'
 import EventsTable from '@/components/EventsTable'
 import Membership from '@/components/Membership'
 import News from '@/components/News'
+import Registration from '@/components/Registration'
 
 const builder = createImageUrlBuilder(client)
 const urlFor = (source) => builder.image(source)
@@ -168,7 +169,15 @@ export default async function EventsPage() {
                     <EventsTable />
                 </section>
 
+                
+
                 {bottomSections.map(renderSection)}
+                <section>
+                    <Registration />
+                </section>
+                <section>
+                    <News />
+                </section>
             </main>
         </>
     )
