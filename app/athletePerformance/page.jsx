@@ -3,6 +3,7 @@ import {createImageUrlBuilder} from '@sanity/image-url'
 import {client} from '@/sanity/lib/client'
 import Membership from '@/components/Membership'
 import News from '@/components/News'
+import Registration from '@/components/Registration'
 
 const builder = createImageUrlBuilder(client)
 const urlFor = (source) => builder.image(source)
@@ -202,7 +203,7 @@ export default async function AthletePerformancePage() {
 
                 <section className="pt-6 border-t border-slate-200 space-y-8">
                     <News />
-                    <Membership />
+                    <Registration />
                 </section>
             </main>
         </>
