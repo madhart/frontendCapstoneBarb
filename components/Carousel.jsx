@@ -35,7 +35,7 @@ export default function Carousel({
 
   if (images.length === 0) {
     return (
-      <section className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
+      <section className="w-full bg-slate-50 py-16">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
           <p className="text-lg text-gray-600">{description}</p>

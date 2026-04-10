@@ -18,7 +18,6 @@ function formatPostedAt(value) {
   if (!value) return "";
   return new Intl.DateTimeFormat("en-CA", {
     dateStyle: "medium",
-    timeStyle: "short",
   }).format(new Date(value));
 }
 
@@ -27,41 +26,54 @@ export default async function NewsPage() {
 
   return (
     <>
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <section className="mb-12 text-center py-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg px-8">
-          <h1 className="text-4xl font-bold text-gray-900">All News</h1>
-        </section>
+      {/* Page Header */}
+      <div className="relative bg-[#222b31] py-16 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2229]/80 to-[#2d2d2d]" />
+        <div className="absolute bottom-0 inset-x-0 h-1 bg-blue-500" />
+        <div className="relative max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">News</h1>
+          <p className="text-slate-300 text-lg">Latest updates from Bicycle Newfoundland and Labrador</p>
+        </div>
+      </div>
 
-        {/* News Section */}
-        <section className="mb-12">
-          <div className="space-y-6">
+      <main className="max-w-6xl mx-auto px-4 py-10">
+        {/* News Articles */}
+        <section className="mb-10">
+          <div className="space-y-5">
             {allNews.length > 0 ? (
               allNews.map((item) => (
-                <article key={item._id} className="p-6 bg-white rounded-lg border border-gray-200 hover:shadow-md transition">
-                  <Link href={`/news/${item.slug}`} className="text-2xl font-bold text-blue-600 hover:text-blue-800 hover:underline">
+                <article
+                  key={item._id}
+                  className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition-shadow"
+                >
+                  <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-2">
+                    {formatPostedAt(item.postedAt)}
+                  </p>
+                  <Link
+                    href={`/news/${item.slug}`}
+                    className="text-xl font-bold text-slate-900 hover:text-blue-700 leading-snug block mb-3"
+                  >
                     {item.title}
                   </Link>
-                  <div className="text-sm text-gray-500 mt-2">
-                    {formatPostedAt(item.postedAt)}
-                  </div>
-                  <p className="mt-4 text-gray-700 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed">
                     {item.shortenedContent}
                   </p>
-                  <Link 
+                  <Link
                     href={`/news/${item.slug}`}
-                    className="inline-block mt-4 text-blue-600 hover:text-blue-800 font-semibold hover:underline"
+                    className="inline-block mt-4 text-sm font-semibold text-blue-600 hover:text-blue-800"
                   >
                     Read More →
                   </Link>
                 </article>
               ))
             ) : (
-              <p className="text-gray-600 text-center py-12">No news articles available at this time.</p>
+              <div className="bg-white rounded-xl p-12 text-center border border-slate-100">
+                <p className="text-slate-500">No news articles available at this time.</p>
+              </div>
             )}
           </div>
         </section>
 
-        {/* BNL Membership Section */}
         <Registration />
       </main>
     </>

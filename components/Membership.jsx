@@ -21,32 +21,34 @@ const portableTextComponents = {
       if (!value || !value.rows) return null;
 
       return (
-        <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md my-6">
-          <thead>
-            <tr className="bg-blue-100 border-b border-blue-200">
-              {value.rows[0]?.cells?.map((cell, cellIdx) => (
-                <th
-                  key={cellIdx}
-                  scope="col"
-                  className="px-6 py-4 text-left text-blue-900 font-semibold"
-                >
-                  {cell}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {value.rows.slice(1).map((row, rowIdx) => (
-              <tr key={rowIdx} className="border-b border-gray-200 hover:bg-blue-50">
-                {row.cells?.map((cell, cellIdx) => (
-                  <td key={cellIdx} className="px-6 py-4 text-gray-800">
+        <div className="overflow-x-auto rounded-xl shadow-sm border border-slate-200 my-4">
+          <table className="w-full border-collapse bg-white">
+            <thead>
+              <tr className="bg-[#222b31] text-white text-sm">
+                {value.rows[0]?.cells?.map((cell, cellIdx) => (
+                  <th
+                    key={cellIdx}
+                    scope="col"
+                    className="px-5 py-3 text-left font-semibold"
+                  >
                     {cell}
-                  </td>
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {value.rows.slice(1).map((row, rowIdx) => (
+                <tr key={rowIdx} className={`text-sm hover:bg-slate-50 transition-colors ${rowIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
+                  {row.cells?.map((cell, cellIdx) => (
+                    <td key={cellIdx} className="px-5 py-3 text-slate-800">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     },
   },

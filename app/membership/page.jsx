@@ -70,10 +70,10 @@ const MEMBERSHIP_FALLBACK_QUERY = `*[_type == "membershipInsuranceInfo"] | order
 const portableTextComponents = {
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc pl-6 space-y-2 my-4 text-gray-800">{children}</ul>
+      <ul className="list-disc pl-6 space-y-2 my-4 text-slate-700">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal pl-6 space-y-2 my-4 text-gray-800">{children}</ol>
+      <ol className="list-decimal pl-6 space-y-2 my-4 text-slate-700">{children}</ol>
     ),
   },
   listItem: {
@@ -85,32 +85,34 @@ const portableTextComponents = {
       if (!value || !value.rows) return null;
 
       return (
-        <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md my-6">
-          <thead>
-            <tr className="bg-blue-100 border-b border-blue-200">
-              {value.rows[0]?.cells?.map((cell, cellIdx) => (
-                <th
-                  key={cellIdx}
-                  scope="col"
-                  className="px-6 py-4 text-left text-blue-900 font-semibold"
-                >
-                  {cell}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {value.rows.slice(1).map((row, rowIdx) => (
-              <tr key={rowIdx} className="border-b border-gray-200 hover:bg-blue-50">
-                {row.cells?.map((cell, cellIdx) => (
-                  <td key={cellIdx} className="px-6 py-4 text-gray-800">
+        <div className="overflow-x-auto rounded-xl shadow-sm border border-slate-100 my-6">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-[#222b31] text-white">
+                {value.rows[0]?.cells?.map((cell, cellIdx) => (
+                  <th
+                    key={cellIdx}
+                    scope="col"
+                    className="px-5 py-3 text-left text-sm font-semibold uppercase tracking-wide whitespace-nowrap"
+                  >
                     {cell}
-                  </td>
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {value.rows.slice(1).map((row, rowIdx) => (
+                <tr key={rowIdx} className={rowIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
+                  {row.cells?.map((cell, cellIdx) => (
+                    <td key={cellIdx} className="px-5 py-3 text-slate-700 text-sm border-t border-slate-100">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     },
   },
@@ -138,9 +140,20 @@ export default async function MembershipPage() {
     membershipContent?.content?.filter((block) => block?._type === "table") || [];
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
+    <>
+      {/* Page Header */}
+      <div className="relative bg-[#222b31] py-16 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2229]/80 to-[#2d2d2d]" />
+        <div className="absolute bottom-0 inset-x-0 h-1 bg-blue-500" />
+        <div className="relative max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Membership</h1>
+          <p className="text-slate-300 text-lg">Join the BNL cycling community today</p>
+        </div>
+      </div>
+
+      <main className="mx-auto max-w-5xl px-4 py-10">
       {membershipHeader ? (
-        <section className="mb-10 space-y-4 border-b border-slate-200 pb-8">
+        <section className="mb-10 bg-white rounded-xl shadow-sm border border-slate-100 p-8 space-y-4">
           {membershipHeader.content ? (
             <PortableText
               value={membershipHeader.content}
@@ -150,23 +163,18 @@ export default async function MembershipPage() {
         </section>
       ) : null}
 
-      <section className="space-y-4 border-b border-slate-200 py-8">
+      <section className="mb-8">
         <Membership />
       </section>
 
       {tableOnlyContent.length > 0 ? (
-        <section className="space-y-4 border-b border-slate-200 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <PortableText value={tableOnlyContent} components={portableTextComponents} />
         </section>
-      ) : (
-        <p className="py-8 text-slate-600">
-          No table found. Confirm the Sanity document is published and has a table
-          block in content.
-        </p>
-      )}
+      ) : null}
 
       {membershipTwelve ? (
-        <section className="space-y-4 border-b border-slate-200 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           {membershipTwelve.content ? (
             <PortableText
               value={membershipTwelve.content}
@@ -177,7 +185,7 @@ export default async function MembershipPage() {
       ) : null}
 
       {membershipNine ? (
-        <section className="space-y-4 border-b border-slate-200 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           {membershipNine.content ? (
             <PortableText
               value={membershipNine.content}
@@ -188,7 +196,7 @@ export default async function MembershipPage() {
       ) : null}
 
       {membershipTen ? (
-        <section className="space-y-4 border-b border-slate-200 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           {membershipTen.content ? (
             <PortableText
               value={membershipTen.content}
@@ -199,7 +207,7 @@ export default async function MembershipPage() {
       ) : null}
 
       {membershipFive ? (
-        <section className="space-y-4 border-b border-slate-200 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           {membershipFive.content ? (
             <PortableText
               value={membershipFive.content}
@@ -210,7 +218,7 @@ export default async function MembershipPage() {
       ) : null}
 
       {membershipSix ? (
-        <section className="space-y-4 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           {membershipSix.content ? (
             <PortableText
               value={membershipSix.content}
@@ -221,7 +229,7 @@ export default async function MembershipPage() {
       ) : null}
 
       {membershipSeven ? (
-        <section className="space-y-4 border-b border-t border-slate-200 py-8">
+        <section className="mb-8 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           {membershipSeven.content ? (
             <PortableText
               value={membershipSeven.content}
@@ -231,13 +239,12 @@ export default async function MembershipPage() {
         </section>
       ) : null}
 
-      <section className="space-y-4 border-b border-slate-200 py-8">
-        <Registration />
-      </section>
+      <Registration />
 
-      <section className="space-y-4 py-8">
+      <section className="mt-10 pt-10 border-t border-slate-200">
         <News />
       </section>
     </main>
+    </>
   );
 }

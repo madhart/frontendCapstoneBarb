@@ -42,12 +42,17 @@ function RegistrationCell({ linkName, linkUrl }) {
 	const label = (linkName || "").trim();
 	const href = (linkUrl || "").trim();
 
-	if (!label && !href) return <span className="opacity-70">—</span>;
-	if (!href) return <span>{label || "Registration"}</span>;
+	if (!label && !href) return <span className="text-slate-400">—</span>;
+	if (!href) return <span className="text-slate-600">{label || "Registration"}</span>;
 
 	return (
-		<Link href={href} className="underline">
-			{label || "Registration"}
+		<Link
+			href={href}
+			className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-md transition-colors"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			{label || "Register"}
 		</Link>
 	);
 }
@@ -57,39 +62,46 @@ export default async function EventsTable() {
 
 	return (
 		<section>
-			<table className="w-full table-auto border-collapse">
-				<thead>
-					<tr className="text-left">
-						<th className="p-2">Date</th>
-						<th className="p-2">Race Name</th>
-						<th className="p-2">Discipline</th>
-						<th className="p-2">Location</th>
-						<th className="p-2">Link to Registration</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					{items.map((item) => (
-						<tr key={item._id} className="border-t">
-							<td className="p-2">{formatEventDate(item.eventDate)}</td>
-							<td className="p-2">{item.raceName || ""}</td>
-							<td className="p-2">{item.discipline || ""}</td>
-							<td className="p-2">{item.location || ""}</td>
-							<td className="p-2">
-								<RegistrationCell linkName={item.linkName} linkUrl={item.linkUrl} />
-							</td>
+			<div className="overflow-x-auto rounded-xl shadow-sm border border-slate-200">
+				<table className="w-full table-auto">
+					<thead>
+						<tr className="bg-[#222b31] text-white text-sm">
+							<th className="px-4 py-3 text-left font-semibold">Date</th>
+							<th className="px-4 py-3 text-left font-semibold">Race Name</th>
+							<th className="px-4 py-3 text-left font-semibold">Discipline</th>
+							<th className="px-4 py-3 text-left font-semibold">Location</th>
+							<th className="px-4 py-3 text-left font-semibold">Registration</th>
 						</tr>
-					))}
+					</thead>
 
-					{items.length === 0 ? (
-						<tr className="border-t">
-							<td className="p-2 opacity-70" colSpan={5}>
-								No events found.
-							</td>
-						</tr>
-					) : null}
-				</tbody>
-			</table>
+					<tbody className="divide-y divide-slate-100">
+						{items.map((item, idx) => (
+							<tr
+								key={item._id}
+								className={`text-sm hover:bg-slate-50 transition-colors ${
+									idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
+								}`}
+							>
+								<td className="px-4 py-3 text-slate-700 whitespace-nowrap font-medium">{formatEventDate(item.eventDate)}</td>
+								<td className="px-4 py-3 text-slate-900 font-medium">{item.raceName || ""}</td>
+								<td className="px-4 py-3 text-slate-600">{item.discipline || ""}</td>
+								<td className="px-4 py-3 text-slate-600">{item.location || ""}</td>
+								<td className="px-4 py-3">
+									<RegistrationCell linkName={item.linkName} linkUrl={item.linkUrl} />
+								</td>
+							</tr>
+						))}
+
+						{items.length === 0 && (
+							<tr>
+								<td className="px-4 py-8 text-slate-500 text-center" colSpan={5}>
+									No upcoming events found.
+								</td>
+							</tr>
+						)}
+					</tbody>
+				</table>
+			</div>
 		</section>
 	);
 }

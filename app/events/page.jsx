@@ -149,14 +149,27 @@ export default async function EventsPage() {
     }
 
     return (
-        <main className="mx-auto max-w-5xl p-6 space-y-8">
-            {topSections.map(renderSection)}
+        <>
+            {/* Page Header */}
+                <div className="relative bg-[#222b31] py-16 px-4 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#1a2229]/80 to-[#2d2d2d]" />
+                <div className="absolute bottom-0 inset-x-0 h-1 bg-blue-500" />
+                <div className="relative max-w-6xl mx-auto text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Events</h1>
+                    <p className="text-slate-300 text-lg">Upcoming cycling events in Newfoundland and Labrador</p>
+                </div>
+            </div>
 
-            <section>
-                <EventsTable />
-            </section>
+            <main className="mx-auto max-w-5xl px-4 py-10 space-y-8">
+                {topSections.map(renderSection)}
 
-            {bottomSections.map(renderSection)}
-        </main>
+                <section>
+                    <h2 className="text-2xl font-bold text-slate-900 border-b-2 border-blue-500 pb-3 mb-6">Event Schedule</h2>
+                    <EventsTable />
+                </section>
+
+                {bottomSections.map(renderSection)}
+            </main>
+        </>
     )
 }
