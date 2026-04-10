@@ -1,50 +1,163 @@
-import Contact from "@/components/Contact";
-import EventsTable from "@/components/EventsTable";
-import Membership from "@/components/Membership";
-import News from "@/components/News";
+import {PortableText} from '@portabletext/react'
+import imageUrlBuilder from '@sanity/image-url'
+import {client} from '@/sanity/lib/client'
+import Contact from '@/components/Contact'
+import EventsTable from '@/components/EventsTable'
+import Membership from '@/components/Membership'
+import News from '@/components/News'
 
-export default function events() {
+const builder = imageUrlBuilder(client)
+const urlFor = (source) => builder.image(source)
+
+const EVENTS_PAGE_QUERY = `
+  *[_type == "nlCyclingEventsInfo"]
+  | order(order asc, _createdAt asc) {
+    _id,
+    title,
+    order,
+    content
+  }
+`
+
+const portableTextComponents = {
+    block: {
+        normal: ({children}) => <p className="mb-4 leading-7">{children}</p>,
+    },
+    marks: {
+        link: ({value, children}) => {
+            const href = value?.href || ''
+            const isExternal = href.startsWith('http')
+
+            return (
+                <a
+                    href={href}
+                    {...(isExternal ? {target: '_blank', rel: 'noopener noreferrer'} : {})}
+                    className="text-blue-600 underline hover:text-blue-800"
+                >
+                    {children}
+                </a>
+            )
+        },
+    },
+    types: {
+        image: ({value}) => {
+            if (!value?.asset) return null
+            return (
+                <img
+                    src={urlFor(value).width(1400).fit('max').auto('format').url()}
+                    alt={value?.alt || ''}
+                    className="my-4 h-auto w-full rounded"
+                />
+            )
+        },
+        table: ({value}) => {
+            const rows = Array.isArray(value?.rows) ? value.rows : []
+            if (!rows.length) return null
+
+            const [headerRow, ...bodyRows] = rows
+            const headerCells = Array.isArray(headerRow?.cells) ? headerRow.cells : []
+
+            return (
+                <div className="my-6 overflow-x-auto">
+                    <table className="w-full border-collapse border border-gray-300">
+                        {headerCells.length > 0 && (
+                            <thead>
+                            <tr>
+                                {headerCells.map((cell, i) => (
+                                    <th
+                                        key={`h-${i}`}
+                                        className="border border-gray-300 bg-gray-100 px-3 py-2 text-left font-semibold"
+                                    >
+                                        {cell}
+                                    </th>
+                                ))}
+                            </tr>
+                            </thead>
+                        )}
+                        <tbody>
+                        {bodyRows.map((row, rowIndex) => {
+                            const cells = Array.isArray(row?.cells) ? row.cells : []
+                            return (
+                                <tr key={row?._key || `r-${rowIndex}`}>
+                                    {cells.map((cell, cellIndex) => (
+                                        <td key={`c-${rowIndex}-${cellIndex}`} className="border border-gray-300 px-3 py-2">
+                                            {cell}
+                                        </td>
+                                    ))}
+                                </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                </div>
+            )
+        },
+    },
+}
+
+function getComponentForTitle(title) {
+    const key = String(title || '').trim().toLowerCase()
+    if (key === 'membership') return Membership
+    if (key === 'news') return News
+    if (key === 'contact') return Contact
+    return null
+}
+
+function isEventsTableDoc(title) {
+    const key = String(title || '').trim().toLowerCase()
+    return key === 'events table' || key === 'eventstable'
+}
+
+export default async function EventsPage() {
+    const sections = await client.fetch(EVENTS_PAGE_QUERY)
+
+    if (!sections?.length) {
+        return <main className="mx-auto max-w-5xl p-6">No events content found.</main>
+    }
+
+    const sortedSections = [...sections].sort((a, b) => {
+        const aOrder = Number.isFinite(Number(a.order)) ? Number(a.order) : Number.MAX_SAFE_INTEGER
+        const bOrder = Number.isFinite(Number(b.order)) ? Number(b.order) : Number.MAX_SAFE_INTEGER
+        return aOrder - bOrder
+    })
+
+    // Keep everything with order <= 2 above EventsTable.
+    const topSections = sortedSections.filter((s) => Number(s.order) <= 2 && !isEventsTableDoc(s.title))
+
+    // Everything else goes below EventsTable.
+    const bottomSections = sortedSections.filter((s) => Number(s.order) > 2 && !isEventsTableDoc(s.title))
+
+    const renderSection = (section) => {
+        const Component = getComponentForTitle(section.title)
+
+        if (Component) {
+            return (
+                <section key={section._id}>
+                    <Component />
+                </section>
+            )
+        }
+
+        return (
+            <article key={section._id}>
+                {section?.content?.length ? (
+                    <PortableText value={section.content} components={portableTextComponents} />
+                ) : (
+                    <p className="text-gray-500">No content yet.</p>
+                )}
+            </article>
+        )
+    }
 
     return (
-        <main>
-            <header>
-                <h1><b>NEWFOUNDLAND AND LABRADOR CYCLING EVENTS</b></h1>
-            </header>
-
-            <section><br />
-                <p>
-                    Bicycle Newfoundland and Labrador (BNL) offers Approved and Sanctioned events in multiple disciplines throughout the year for all cycling levels and all ages.
-                    Below is the TENTATIVE SCHEDULE.  If any races, dates or locations change, we will post on our website as well on the BNL Facebook page.
-                    Our racing organizers are working hard to ensure these races are held each year – please register early for the events as it is helpful to the organizers when preparing for the races.
-                </p>
-            </section> <br />
+        <main className="mx-auto max-w-5xl p-6 space-y-8">
+            {topSections.map(renderSection)}
 
             <section>
-                <p>
-                    <b>Events Table</b>
-                </p>
-            </section><br />
+                <EventsTable />
+            </section>
 
-            <EventsTable />
-            <br />
-           
-            <section>
-                <p>
-                    <b>Results</b>
-                </p>
-            </section><br />
-
-            <section>
-                <p>
-                    <b>Event Forms</b>
-                </p>
-            </section><br />
-
-
-            <Membership /><br />
-            <News /><br />
-            <Contact /><br />
-
+            {bottomSections.map(renderSection)}
         </main>
-    );
+    )
 }
