@@ -15,6 +15,7 @@ export default function Navbar() {
         { href: "/events", label: "Events" },
         { href: "/news", label: "News" },
         { href: "/contact", label: "Contact" },
+        { href: "/coachingOfficials", label: "Coaching Officals" },
     ];
 
     const isActive = (href) => {
