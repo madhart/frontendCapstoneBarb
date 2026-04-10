@@ -15,36 +15,49 @@ const CONTACT_QUERY = `*[_type == "contactInfo"][0] {
 const portableTextComponents = {
   types: {
     table: ({ value }) => {
-      if (!value || !value.rows) return null;
-      
+      if (!value || !value.rows || value.rows.length === 0) return null;
+      const [headerRow, ...bodyRows] = value.rows;
       return (
-        <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md my-6">
-          <tbody>
-            {value.rows.map((row, rowIdx) => (
-              <tr key={rowIdx} className="border-b border-gray-200 hover:bg-blue-50">
-                {row.cells?.map((cell, cellIdx) => (
-                  <td key={cellIdx} className="px-6 py-4 text-gray-800">{cell}</td>
+        <div className="overflow-x-auto rounded-xl shadow-sm border border-slate-100 my-6">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-[#222b31] text-white">
+                {headerRow.cells?.map((cell, i) => (
+                  <th key={i} className="px-5 py-3 text-left text-sm font-semibold uppercase tracking-wide whitespace-nowrap">
+                    {cell}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {bodyRows.map((row, rowIdx) => (
+                <tr key={rowIdx} className={rowIdx % 2 === 0 ? "bg-white" : "bg-slate-50"}>
+                  {row.cells?.map((cell, cellIdx) => (
+                    <td key={cellIdx} className="px-5 py-3 text-slate-700 text-sm border-t border-slate-100">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     },
   },
   block: {
-    normal: ({ children }) => <p className="text-gray-700 leading-relaxed mb-4">{children}</p>,
-    h1: ({ children }) => <h1 className="text-4xl font-bold text-gray-900 mb-6 mt-8">{children}</h1>,
-    h2: ({ children }) => <h2 className="text-3xl font-bold text-blue-700 mb-4 mt-6">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-2xl font-semibold text-gray-900 mb-3 mt-4">{children}</h3>,
+    normal: ({ children }) => <p className="text-slate-700 leading-relaxed mb-4">{children}</p>,
+    h1: ({ children }) => <h1 className="text-3xl font-bold text-slate-900 mb-5 mt-8 pb-2 border-b border-slate-200">{children}</h1>,
+    h2: ({ children }) => <h2 className="text-2xl font-bold text-[#222b31] mb-3 mt-6">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-lg font-semibold text-slate-900 mb-2 mt-4">{children}</h3>,
   },
   marks: {
-    strong: ({ children }) => <strong className="font-bold text-gray-900">{children}</strong>,
-    em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+    strong: ({ children }) => <strong className="font-semibold text-slate-900">{children}</strong>,
+    em: ({ children }) => <em className="italic text-slate-600">{children}</em>,
     link: ({ value, children }) => (
-      <a 
-        href={value.href} 
-        className="text-blue-600 hover:text-blue-800 hover:underline" 
+      <a
+        href={value.href}
+        className="text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors"
         target={value.href?.startsWith("mailto:") ? undefined : "_blank"}
         rel={value.href?.startsWith("mailto:") ? undefined : "noopener noreferrer"}
       >
@@ -59,29 +72,27 @@ export default async function ContactPage() {
 
   return (
     <>
-      
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <section className="mb-12 text-center py-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg px-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us for More Information</h1>
-        </section>
+      {/* Page Header */}
+      <div className="relative bg-[#222b31] py-16 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a2229]/80 to-[#2d2d2d]" />
+        <div className="absolute bottom-0 inset-x-0 h-1 bg-blue-500" />
+        <div className="relative max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Contact Us</h1>
+          <p className="text-slate-300 text-lg">Get in touch with Bicycle Newfoundland and Labrador</p>
+        </div>
+      </div>
+
+      <main className="max-w-4xl mx-auto px-4 py-12">
         {contactContent ? (
-          <section className="mb-12">
-            <div className="p-8 bg-white rounded-lg border border-gray-200 space-y-6">
-              <PortableText value={contactContent.content} components={portableTextComponents} />
-            </div>
+          <section className="bg-white rounded-xl shadow-sm border border-slate-100 p-8 mb-10">
+            <PortableText value={contactContent.content} components={portableTextComponents} />
           </section>
         ) : (
-          <section className="mb-12 p-6 bg-yellow-50 border-l-4 border-yellow-400">
-            <p className="text-gray-600">Contact content not yet available.</p>
+          <section className="mb-10 p-6 bg-slate-50 border-l-4 border-blue-500 rounded-lg">
+            <p className="text-slate-600">Contact content not yet available.</p>
           </section>
         )}
         <Registration />
-        <section className="mt-16 pt-12 border-t-2 border-gray-300 mb-12">
-          <Membership />
-        </section>
-        <section className="mt-16 pt-12 border-t-2 border-gray-300">
-          <News />
-        </section>
       </main>
     </>
   );

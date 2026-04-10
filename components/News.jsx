@@ -17,7 +17,6 @@ function formatPostedAt(value) {
   if (!value) return "";
   return new Intl.DateTimeFormat("en-CA", {
     dateStyle: "medium",
-    timeStyle: "short",
   }).format(new Date(value));
 }
 
@@ -26,34 +25,48 @@ export default async function News() {
 
   return (
     <section>
-      <h2 className="text-2xl font-bold text-gray-900 border-b-4 border-blue-500 pb-3 mb-8">News</h2>
+      <h2 className="text-2xl font-bold text-slate-900 border-b-2 border-blue-500 pb-3 mb-6">
+        Recent News
+      </h2>
 
-      <table className="w-full table-fixed mb-6">
-        <tbody>
-          <tr>
-            {items.map((item) => (
-              <td key={item._id} className="align-top p-4 w-1/4">
-                <Link href={`/news/${item.slug}`} className="font-semibold text-blue-600 hover:text-blue-800 underline">
-                  {item.title}
-                </Link>
-
-                <div className="text-sm text-gray-500 mt-1">
-                  {formatPostedAt(item.postedAt)}
-                </div>
-
-                <p className="mt-2 text-gray-700">
+      {items.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          {items.map((item) => (
+            <article
+              key={item._id}
+              className="bg-white rounded-xl shadow-sm border border-slate-100 p-5 flex flex-col hover:shadow-md transition-shadow"
+            >
+              <p className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-2">
+                {formatPostedAt(item.postedAt)}
+              </p>
+              <Link
+                href={`/news/${item.slug}`}
+                className="font-semibold text-slate-900 hover:text-blue-600 leading-snug mb-3 line-clamp-3"
+              >
+                {item.title}
+              </Link>
+              {item.shortenedContent && (
+                <p className="text-sm text-slate-600 leading-relaxed flex-1 line-clamp-4">
                   {item.shortenedContent}
                 </p>
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+              )}
+              <Link
+                href={`/news/${item.slug}`}
+                className="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-800 uppercase tracking-wide"
+              >
+                Read More →
+              </Link>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p className="text-slate-500 py-6">No news articles available.</p>
+      )}
 
       <div className="text-center">
-        <Link 
-          href="/news" 
-          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition"
+        <Link
+          href="/news"
+          className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 px-8 rounded-lg transition-colors shadow-sm"
         >
           View All News
         </Link>
