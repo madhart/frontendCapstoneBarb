@@ -29,6 +29,13 @@ const portableTextComponents = {
   },
 };
 
+export async function generateStaticParams() {
+  const slugs = await client.fetch(
+    `*[_type == "newsItem" && defined(slug.current)]{ "slug": slug.current }`
+  );
+  return slugs.map(({ slug }) => ({ slug }));
+}
+
 export default async function NewsItemPage({ params }) {
   const { slug } = await params;
 
